@@ -1,14 +1,12 @@
 package ru.stqa.geometry.figure;
 
-public class Triangle {
-  private double sideOne;
-  private double sideTwo;
-  private double sideThree;
-
-  public Triangle(double sideOne, double sideTwo, double sideThree) {
-    this.sideOne = sideOne;
-    this.sideTwo = sideTwo;
-    this.sideThree = sideThree;
+public record Triangle(double sideOne,double sideTwo, double sideThree) {
+  public Triangle {
+    if ((sideOne <= 0) | (sideTwo <= 0) | (sideThree <= 0)) {
+      throw new IllegalArgumentException("The length of the triangle side should be positive.");
+    } else if ((sideOne >= sideTwo + sideThree) | (sideTwo >= sideOne + sideThree) | (sideThree >= sideOne + sideTwo)) {
+      throw new IllegalArgumentException("The length of one side of the triangle should be less than the sum of the other two sides.");
+    }
   }
 
   public double getSideOne() {

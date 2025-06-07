@@ -14,4 +14,24 @@ public class TriangleTests {
   void canCalculateSquare() {
     Assertions.assertEquals(6.0, (new Triangle(3.0, 4.0, 5.0)).calculateSquare());
   }
+
+  @Test
+  void cannotCreateTriangleWithNegativeSide() {
+    try {
+         new Triangle(-5.0, 6.0, 7.0);
+      Assertions.fail();
+    } catch (IllegalArgumentException exception) {
+      // OK
+    }
+  }
+  
+  @Test
+  void cannotCreateTriangleWhenTriangleRuleIsViolated() {
+    try {
+      new Triangle(10.0, 3.0, 3.0);
+      Assertions.fail();
+    } catch (IllegalArgumentException exception) {
+      // OK
+    }
+  }
 }
