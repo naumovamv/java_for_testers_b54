@@ -24,7 +24,7 @@ public class TriangleTests {
       // OK
     }
   }
-  
+
   @Test
   void cannotCreateTriangleWhenTriangleRuleIsViolated() {
     try {
@@ -34,4 +34,25 @@ public class TriangleTests {
       // OK
     }
   }
+  @Test
+  void testEquality() {
+    Triangle t1 = new Triangle (3.0, 4.0, 5.0);
+    Triangle t2 = new Triangle (3.0, 4.0, 5.0);
+    Assertions.assertEquals(t1, t2);
+  }
+
+  @Test
+  void testEquality2() {
+    Triangle t1 = new Triangle (3.0, 4.0, 5.0);
+    Triangle t2 = new Triangle (4.0, 5.0, 3.0);
+    Assertions.assertEquals(t1, t2);
+  }
+
+  @Test
+  void testNotEquality() {
+    Triangle t1 = new Triangle (3.0, 4.0, 5.0);
+    Triangle t2 = new Triangle (7.0, 8.0, 9.0);
+    Assertions.assertNotEquals(t1, t2);
+  }
+
 }
