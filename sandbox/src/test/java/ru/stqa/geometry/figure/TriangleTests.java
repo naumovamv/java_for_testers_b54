@@ -54,5 +54,4 @@ public class TriangleTests {
     Triangle t2 = new Triangle (7.0, 8.0, 9.0);
     Assertions.assertNotEquals(t1, t2);
   }
-
 }
