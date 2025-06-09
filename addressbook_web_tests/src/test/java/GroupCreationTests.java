@@ -2,6 +2,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.JavascriptExecutor;
@@ -39,6 +40,19 @@ public class GroupCreationTests {
     driver.findElement(By.name("submit")).click();
     driver.findElement(By.linkText("groups")).click();
     driver.findElement(By.linkText("home")).click();
+    driver.findElement(By.linkText("Logout")).click();
+  }
+
+  @Test
+  public void deleteGroupTest() {
+    driver.get("http://localhost/addressbook/");
+    driver.manage().window().setSize(new Dimension(1176, 693));
+    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
+    driver.findElement(By.linkText("groups")).click();
+    driver.findElement(By.name("selected[]")).click();
+    driver.findElement(By.name("delete")).click();
     driver.findElement(By.linkText("Logout")).click();
   }
 }
