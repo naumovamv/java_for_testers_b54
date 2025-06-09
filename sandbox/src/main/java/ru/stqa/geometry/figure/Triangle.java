@@ -16,9 +16,9 @@ public record Triangle(double sideOne, double sideTwo, double sideThree) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Triangle triangle = (Triangle) o;
-    return (Double.compare(sideOne, triangle.sideOne) == 0 || Double.compare(sideOne, triangle.sideTwo) == 0 || Double.compare(sideOne, triangle.sideThree) == 0)
-            && (Double.compare(sideTwo, triangle.sideOne) == 0 || Double.compare(sideTwo, triangle.sideTwo) == 0 || Double.compare(sideTwo, triangle.sideThree) == 0)
-            && (Double.compare(sideThree, triangle.sideOne) == 0 || Double.compare(sideThree, triangle.sideTwo) == 0 || Double.compare(sideThree, triangle.sideThree) == 0);
+    return (Double.compare(triangle.sideOne, this.sideOne) == 0 || Double.compare(triangle.sideOne, this.sideTwo) == 0 || Double.compare(triangle.sideOne, this.sideThree) == 0)
+            && ((Double.compare(triangle.sideTwo, this.sideOne) == 0 || Double.compare(triangle.sideTwo, this.sideTwo) == 0 || Double.compare(triangle.sideTwo, this.sideThree) == 0))
+            && ((Double.compare(triangle.sideThree, this.sideOne) == 0 || Double.compare(triangle.sideThree, this.sideTwo) == 0 || Double.compare(triangle.sideThree, this.sideThree) == 0));
   }
 
   @Override
