@@ -19,10 +19,4 @@ public class GroupCreationTests extends TestBase {
   public void canCreateGroupWithNameOnlyTest() {
     app.groups().createGroup(new GroupData().withName("some name"));
   }
-
-  @Test
-  public void canDeleteGroupTest() {
-    app.groups().isGroupPresent(app);
-    app.groups().removeGroup();
-  }
 }
