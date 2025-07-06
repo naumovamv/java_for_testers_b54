@@ -10,7 +10,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    openContactPage();
+    openContactsPage();
     initContactCreation();
     fillContactForm(contact);
     submitContactCreation();
@@ -18,24 +18,24 @@ public class ContactHelper extends HelperBase {
   }
 
   public void removeContact() {
-    openContactPage();
+    openContactsPage();
     selectContact();
-    removeSelectedContact();
+    removeSelectedContacts();
     returnToHomePage();
   }
 
-  private void removeSelectedContact() {
+  private void removeSelectedContacts() {
     click((By.xpath("//input[@value=\'Delete\']")));
   }
 
-  public void openContactPage() {
+  public void openContactsPage() {
     if (!manager.isElementPresent(By.name("searchstring"))) {
       click(By.name("add new"));
     }
   }
 
   public void isContactPresent(ApplicationManager applicationManager) {
-    openContactPage();
+    openContactsPage();
     if (!manager.isElementPresent(By.name("selected[]"))) {
       manager.contacts().createContact(new ContactData());
     }
@@ -53,7 +53,7 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-    private void fillContactForm(ContactData contact) {
+  private void fillContactForm(ContactData contact) {
     type(By.name("firstname"), contact.firstName());
     type(By.name("lastname"), contact.lastName());
     type(By.name("mobile"), contact.mobilePhone());
@@ -64,7 +64,20 @@ public class ContactHelper extends HelperBase {
   }
 
   public int getContactCount() {
-    openContactPage();
+    openContactsPage();
     return manager.driver.findElements(By.name("selected[]")).size();
+  }
+
+  public void removalAllContacts() {
+    openContactsPage();
+    selectAllContacts();
+    removeSelectedContacts();
+  }
+
+  private void selectAllContacts() {
+    var checkboxes = manager.driver.findElements(By.name("selected[]"));
+    for (var checkbox : checkboxes) {
+      checkbox.click();
+    }
   }
 }
