@@ -43,13 +43,6 @@ public class GroupHelper extends HelperBase {
     }
   }
 
-  public void isGroupPresent(ApplicationManager applicationManager) {
-    openGroupPage();
-    if (!manager.isElementPresent(By.name("selected[]"))) {
-      manager.groups().createGroup(new GroupData());
-    }
-  }
-
   private void submitGroupCreation() {
     click(By.name("submit"));
   }
@@ -80,4 +73,8 @@ public class GroupHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
+  public int getCount() {
+    openGroupPage();
+    return manager.driver.findElements(By.name("selected[]")).size();
+  }
 }
