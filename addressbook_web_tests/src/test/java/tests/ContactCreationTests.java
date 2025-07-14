@@ -23,4 +23,17 @@ public class ContactCreationTests extends TestBase {
   public void canCreateGroupWithNameOnlyTest() {
     app.contacts().createContact(new ContactData().withName("Name", "+7(555)4443322"));
   }
+
+  @Test
+  public void canCreateMultipleContactTest() {
+    int n = 5;
+    int contactCount = app.contacts().getContactCount();
+
+    for (int i =0; i < n; i++) {
+      app.contacts().createContact(new ContactData(randomString(i * 5), randomString(i * 8), "+7(888)7776655"));
+    }
+
+    int newContactCount = app.contacts().getContactCount();
+    Assertions.assertEquals(contactCount + n, newContactCount);
+  }
 }
