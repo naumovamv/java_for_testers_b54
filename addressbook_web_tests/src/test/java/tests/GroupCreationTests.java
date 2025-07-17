@@ -14,30 +14,33 @@ public class GroupCreationTests extends TestBase {
     for (var name : List.of("", "group name")) {
       for (var header : List.of("", "group header")) {
         for (var footer : List.of("", "group footer")) {
-          result.add(new GroupData(name, header, footer));
+          result.add(new GroupData().withName(name).withHeader(header).withFooter(footer));
         }
       }
     }
     for (int i = 0; i < 5; i++) {
-      result.add(new GroupData((randomString(i * 10)), (randomString(i * 10)), (randomString(i * 10))));
+      result.add(new GroupData()
+              .withName(randomString(i * 10))
+              .withHeader(randomString(i * 10))
+              .withFooter(randomString(i * 10)));
     }
     return result;
   }
 
   public static List<GroupData> negativeGroupProvider() {
     var result = new ArrayList<GroupData>(List.of(
-            new GroupData("group name'", "", "")));
+            new GroupData("", "group name'", "", "")));
     return result;
   }
 
   @ParameterizedTest
   @MethodSource("groupProvider")
   public void canCreateMultipleGroupTest(GroupData group) {
-    int n = 5;
-    int groupCount = app.groups().getCount();
+    app.groups().openGroupsPage();
+    List<GroupData> oldGroups = app.groups().getList();
     app.groups().createGroup(group);
-    int newGroupCount = app.groups().getCount();
-    Assertions.assertEquals(groupCount + 1, newGroupCount);
+    List<GroupData> newGroups = app.groups().getList();
+    Assertions.assertEquals(newGroups.size(), oldGroups.size() + 1);
   }
 
   @ParameterizedTest

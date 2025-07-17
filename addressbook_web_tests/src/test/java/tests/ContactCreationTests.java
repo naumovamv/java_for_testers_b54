@@ -15,30 +15,33 @@ public class ContactCreationTests extends TestBase {
     for (var first_name : List.of("", "First name")) {
       for (var last_name : List.of("", "Last name")) {
         for (var mobile_phone : List.of("", "+7(555)4443322")) {
-          result.add(new ContactData(first_name, last_name, mobile_phone));
+          result.add(new ContactData().withName(first_name).withLastName(last_name).withMobilePhone(mobile_phone));
         }
       }
     }
     for (int i = 0; i < 5; i++) {
-      result.add(new ContactData((randomString(i * 10)), (randomString(i * 10)), (randomString(i * 10))));
+      result.add(new ContactData()
+              .withName(randomString(i * 10))
+              .withLastName(randomString(i * 10))
+              .withMobilePhone(randomString(i * 10)));
     }
     return result;
   }
 
   public static List<ContactData> negativeContactProvider() {
     var result = new ArrayList<ContactData>(List.of(
-            new ContactData("contact name'", "", "")));
+            new ContactData("", "contact name'", "", "")));
     return result;
   }
 
   @ParameterizedTest
   @MethodSource("contactProvider")
   public void canCreateMultipleContactTest(ContactData contact) {
-    int n = 5;
-    int contactCount = app.contacts().getContactCount();
+    app.contacts().openContactsPage();
+    List<ContactData> oldContacts = app.contacts().getList();
     app.contacts().createContact(contact);
-    int newContactCount = app.contacts().getContactCount();
-    Assertions.assertEquals(contactCount + 1, newContactCount);
+    List<ContactData> newContacts = app.contacts().getList();
+    Assertions.assertEquals(newContacts.size(), oldContacts.size() + 1);
   }
 
   @ParameterizedTest
