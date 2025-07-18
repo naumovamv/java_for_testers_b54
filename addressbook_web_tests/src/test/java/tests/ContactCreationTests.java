@@ -17,7 +17,8 @@ public class ContactCreationTests extends TestBase {
     for (var first_name : List.of("", "First name")) {
       for (var last_name : List.of("", "Last name")) {
         for (var mobile_phone : List.of("", "+7(555)4443322")) {
-          result.add(new ContactData().withName(first_name).withLastName(last_name).withMobilePhone(mobile_phone));
+          for (var photo : List.of("src/test/resources/images/avatar.png"))
+          result.add(new ContactData().withName(first_name).withLastName(last_name).withMobilePhone(mobile_phone).withPhoto(photo));
         }
       }
     }
@@ -25,14 +26,15 @@ public class ContactCreationTests extends TestBase {
       result.add(new ContactData()
               .withName(randomString(i * 10))
               .withLastName(randomString(i * 10))
-              .withMobilePhone(randomString(i * 10)));
+              .withMobilePhone(randomString(i * 10))
+              .withPhoto("src/test/resources/images/avatar.png"));
     }
     return result;
   }
 
   public static List<ContactData> negativeContactProvider() {
     var result = new ArrayList<ContactData>(List.of(
-            new ContactData("", "contact name'", "", "")));
+            new ContactData("", "contact name'", "", "", "")));
     return result;
   }
 
@@ -50,7 +52,8 @@ public class ContactCreationTests extends TestBase {
     expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id())
             .withName(newContacts.get(newContacts.size() - 1).firstName())
             .withLastName(newContacts.get(newContacts.size() - 1).lastName())
-            .withMobilePhone(newContacts.get(newContacts.size() - 1).mobilePhone()));
+            .withMobilePhone(newContacts.get(newContacts.size() - 1).mobilePhone())
+            .withPhoto(newContacts.get(newContacts.size() - 1).photo()));
     expectedList.sort(compareById);
     Assertions.assertEquals(newContacts, expectedList);
   }
