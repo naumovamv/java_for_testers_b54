@@ -53,6 +53,14 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
+  private void initContactModification() {
+    click(By.xpath("//td[8]/a/img[@alt='Edit']"));
+  }
+
+  private void submitContactModification() {
+    click(By.name("update"));
+  }
+
   private void returnToHomePage() {
     click(By.linkText("home"));
   }
@@ -83,6 +91,15 @@ public class ContactHelper extends HelperBase {
     for (var checkbox : checkboxes) {
       checkbox.click();
     }
+  }
+
+  public void modifyContact(ContactData contact, ContactData modifiedContact) {
+    openContactsPage();
+    selectContact(contact);
+    initContactModification();
+    fillContactForm(modifiedContact);
+    submitContactModification();
+    returnToHomePage();
   }
 
   public List<ContactData> getList() {
