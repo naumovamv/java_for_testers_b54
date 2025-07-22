@@ -3,6 +3,7 @@ package manager;
 import model.ContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,9 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  private void initContactModification() {
-    click(By.xpath("//td[8]/a/img[@alt='Edit']"));
+  private void initContactModification(ContactData contact) {
+    WebElement editButton = manager.driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",contact.id())));
+    editButton.click();
   }
 
   private void submitContactModification() {
@@ -69,7 +71,9 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contact.firstName());
     type(By.name("lastname"), contact.lastName());
     type(By.name("mobile"), contact.mobilePhone());
-    attach(By.name("photo"), contact.photo());
+    if (contact.photo() != null && !contact.photo().isBlank()) {
+      attach(By.name("photo"), contact.photo());
+    }
   }
 
   private void selectContact(ContactData contact) {
@@ -96,8 +100,7 @@ public class ContactHelper extends HelperBase {
 
   public void modifyContact(ContactData contact, ContactData modifiedContact) {
     openContactsPage();
-    selectContact(contact);
-    initContactModification();
+    initContactModification(contact);
     fillContactForm(modifiedContact);
     submitContactModification();
     returnToHomePage();
