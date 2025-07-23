@@ -1,0 +1,19 @@
+[ {
+  "id" : "",
+  "firstName" : "",
+  "lastName" : "",
+  "mobilePhone" : "",
+  "photo" : "src\\test\\resources\\images\\avatar.png"
+}, {
+  "id" : "",
+  "firstName" : "oncqkaymb",
+  "lastName" : "zhbdnkzzc",
+  "mobilePhone" : "piyflpesk",
+  "photo" : "src\\test\\resources\\images\\avatar2.png"
+}, {
+  "id" : "",
+  "firstName" : "whiamykhbebagflbhif",
+  "lastName" : "lonvlcvlbzlwhfsepcd",
+  "mobilePhone" : "dqmzluufbhnreyfodfc",
+  "photo" : "src\\test\\resources\\images\\avatar4.png"
+} ]
