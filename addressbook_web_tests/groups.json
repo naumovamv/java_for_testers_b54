@@ -2,15 +2,21 @@
   "id" : "",
   "name" : "",
   "header" : "",
-  "footer" : ""
+  "footer" : "",
+  "domainId" : 0,
+  "groupParentId" : null
 }, {
   "id" : "",
   "name" : "akgcoduwj",
   "header" : "ulggdvnxk",
-  "footer" : "axtzsgvyl"
+  "footer" : "axtzsgvyl",
+  "domainId" : 0,
+  "groupParentId" : null
 }, {
   "id" : "",
   "name" : "tvyrloehetsjezbxtbn",
   "header" : "grdbrexuzkxelphvrcm",
-  "footer" : "jawldzjuazzoihrdgys"
+  "footer" : "jawldzjuazzoihrdgys",
+  "domainId" : 0,
+  "groupParentId" : null
 } ]

@@ -36,8 +36,16 @@ public class ContactCreationTests extends TestBase {
 
   public static List<ContactData> negativeContactProvider() {
     var result = new ArrayList<ContactData>(List.of(
-            new ContactData("", "contact name'", "", "", "")));
+            new ContactData("", "contact name'", "", "", "", "0", "")));
     return result;
+  }
+
+  public static List<ContactData> singleRandomContactProvider() throws IOException {
+    return List.of(new ContactData()
+            .withName(CommonFunctions.randomString(10))
+            .withLastName(CommonFunctions.randomString(10))
+            .withMobilePhone(CommonFunctions.randomString(10))
+            .withPhoto(""));
   }
 
   @ParameterizedTest
@@ -55,7 +63,9 @@ public class ContactCreationTests extends TestBase {
             .withName(newContacts.get(newContacts.size() - 1).firstName())
             .withLastName(newContacts.get(newContacts.size() - 1).lastName())
             .withMobilePhone(newContacts.get(newContacts.size() - 1).mobilePhone())
-            .withPhoto(newContacts.get(newContacts.size() - 1).photo()));
+            .withPhoto(newContacts.get(newContacts.size() - 1).photo())
+            .withDomainId(newContacts.get(newContacts.size() - 1).domainId())
+            .withNickname(newContacts.get(newContacts.size() - 1).nickname()));
     expectedList.sort(compareById);
     Assertions.assertEquals(newContacts, expectedList);
   }
@@ -66,6 +76,32 @@ public class ContactCreationTests extends TestBase {
     var oldContacts = app.contacts().getList();
     app.contacts().createContact(contact);
     var newContacts = app.contacts().getList();
+    Assertions.assertEquals(newContacts, oldContacts);
+  }
+
+  @ParameterizedTest
+  @MethodSource("singleRandomContactProvider")
+  public void canCreateContactDbAssertTest(ContactData contact) {
+    var oldContacts = app.jdbc().getContactList();
+    app.contacts().createContact(contact);
+    var newContacts = app.jdbc().getContactList();
+    Comparator<ContactData> compareById = (o1, o2) -> {
+      return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+    };
+    newContacts.sort(compareById);
+    var maxId = newContacts.get(newContacts.size() - 1).id();
+    var expectedList = new ArrayList<>(oldContacts);
+    expectedList.add(contact.withId(maxId));
+    expectedList.sort(compareById);
+    Assertions.assertEquals(newContacts, expectedList);
+  }
+
+  @ParameterizedTest
+  @MethodSource("negativeContactProvider")
+  public void canNotCreateMultipleContactDbAssertTest(ContactData contact) {
+    var oldContacts = app.jdbc().getContactList();
+    app.contacts().createContact(contact);
+    var newContacts = app.jdbc().getContactList();
     Assertions.assertEquals(newContacts, oldContacts);
   }
 }

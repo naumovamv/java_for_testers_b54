@@ -30,12 +30,24 @@ public class Generator {
   int count;
 
   public static void main(String[] args) throws IOException {
-    var generator = new Generator();
+   /* var generator = new Generator();
     JCommander.newBuilder()
             .addObject(generator)
             .build()
             .parse(args);
-    generator.run();
+    generator.run(); */
+    var generator = new Generator();
+    try {
+      JCommander.newBuilder()
+              .addObject(generator)
+              .build()
+              .parse(args);
+      generator.run();
+    } catch (Exception e) {
+      System.err.println("❌ Ошибка при выполнении генератора: " + e.getMessage());
+      e.printStackTrace();
+      System.exit(1); // Явно указываем, что завершили с ошибкой
+    }
   }
 
   private void run() throws IOException {
@@ -91,7 +103,9 @@ public class Generator {
               .withName(CommonFunctions.randomString(i * 10))
               .withLastName(CommonFunctions.randomString(i * 10))
               .withMobilePhone(CommonFunctions.randomString(i * 10))
-              .withPhoto(CommonFunctions.randomFile("src/test/resources/images")));
+              .withPhoto(CommonFunctions.randomFile("src/test/resources/images"))
+              .withDomainId("0")
+              .withNickname(CommonFunctions.randomString(i * 10)));
     }
     return result;
   }
@@ -102,7 +116,9 @@ public class Generator {
       result.add(new GroupData()
               .withName(CommonFunctions.randomString(i * 10))
               .withHeader(CommonFunctions.randomString(i * 10))
-              .withFooter(CommonFunctions.randomString(i * 10)));
+              .withFooter(CommonFunctions.randomString(i * 10))
+              .withDomainId("0")
+              .withGroupParentId(null));
     }
     return result;
   }
