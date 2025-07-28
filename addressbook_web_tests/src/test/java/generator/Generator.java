@@ -30,24 +30,12 @@ public class Generator {
   int count;
 
   public static void main(String[] args) throws IOException {
-   /* var generator = new Generator();
+   var generator = new Generator();
     JCommander.newBuilder()
             .addObject(generator)
             .build()
             .parse(args);
-    generator.run(); */
-    var generator = new Generator();
-    try {
-      JCommander.newBuilder()
-              .addObject(generator)
-              .build()
-              .parse(args);
-      generator.run();
-    } catch (Exception e) {
-      System.err.println("❌ Ошибка при выполнении генератора: " + e.getMessage());
-      e.printStackTrace();
-      System.exit(1); // Явно указываем, что завершили с ошибкой
-    }
+    generator.run();
   }
 
   private void run() throws IOException {

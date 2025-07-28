@@ -56,4 +56,28 @@ public class GroupRemovalTests extends TestBase {
     app.groups().removalAllGroups();
     Assertions.assertTrue(app.jdbc().getGroupList().isEmpty());
   }
+
+  @Test
+  public void canDeleteGroupDbAssertHbmTest() {
+    if (app.hbm().getGroupCount() == 0) {
+      app.hbm().createGroup(new GroupData("", "group name", "group header", "group footer", "", ""));
+    }
+    var oldGroups = app.hbm().getGroupList();
+    var rnd = new Random();
+    var index = rnd.nextInt(oldGroups.size());
+    app.groups().removeGroup(oldGroups.get(index));
+    var newGroups = app.hbm().getGroupList();
+    var expectedList = new ArrayList<>(oldGroups);
+    expectedList.remove(index);
+    Assertions.assertEquals(newGroups, expectedList);
+  }
+
+  @Test
+  public void canRemovalAllGroupsAtOnceDbAssertHbmTest() {
+    if (app.hbm().getGroupCount() == 0) {
+      app.hbm().createGroup(new GroupData("", "group name", "group header", "group footer", "", ""));
+    }
+    app.groups().removalAllGroups();
+    Assertions.assertEquals(0, app.hbm().getGroupCount());
+  }
 }
