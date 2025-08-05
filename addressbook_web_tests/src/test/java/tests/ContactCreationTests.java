@@ -6,6 +6,7 @@ import common.CommonFunctions;
 import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -40,13 +41,16 @@ public class ContactCreationTests extends TestBase {
     return result;
   }
 
-  public static List<ContactData> singleRandomContactProvider() throws IOException {
+  /*public static List<ContactData> singleRandomContactProvider() throws IOException {
     return List.of(new ContactData()
             .withName(CommonFunctions.randomString(10))
             .withLastName(CommonFunctions.randomString(10))
             .withMobilePhone(CommonFunctions.randomString(10))
             .withPhoto(""));
-  }
+    if (app.jdbc().getGroupList().isEmpty()) {
+      app.groups().createGroup(new GroupData("", "group name", "group header", "group footer", "", ""));
+    }
+  } */
 
   @ParameterizedTest
   @MethodSource("contactProvider")
@@ -103,5 +107,22 @@ public class ContactCreationTests extends TestBase {
     app.contacts().createContact(contact);
     var newContacts = app.jdbc().getContactList();
     Assertions.assertEquals(newContacts, oldContacts);
+  }
+
+ @Test
+  public void canCreateContactInGroupDbAssertTest() {
+   var contact = new ContactData()
+           .withName(CommonFunctions.randomString(10))
+           .withLastName(CommonFunctions.randomString(10))
+           .withMobilePhone(CommonFunctions.randomString(10))
+           .withPhoto("");
+  if (app.hbm().getGroupList().isEmpty()) {
+     app.hbm().createGroup(new GroupData("", "group name", "group header", "group footer", "", ""));
+   }
+   var group = app.hbm().getGroupList().get(0);
+   var oldRelated = app.hbm().getContactsInGroup(group);
+   app.contacts().createContact(contact, group);
+   var newRelated = app.hbm().getContactsInGroup(group);
+   Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
   }
 }

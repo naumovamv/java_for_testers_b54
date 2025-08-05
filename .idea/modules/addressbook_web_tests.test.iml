@@ -15,7 +15,7 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.14.2" level="project" />
     <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:6.3.0.CR1" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:6.4.0.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter:5.9.1" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:4.33.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.14.2" level="project" />
@@ -72,7 +72,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-runtime:4.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.antlr:antlr4-runtime:4.10.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.antlr:antlr4-runtime:4.13.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-core:4.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.1" level="project" />
