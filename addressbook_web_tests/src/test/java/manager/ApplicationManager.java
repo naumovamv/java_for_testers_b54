@@ -14,7 +14,7 @@ public class ApplicationManager {
   private GroupHelper groups;
   private ContactHelper contacts;
   private Properties properties;
-  private JdbcHelper jdbc;
+  public JdbcHelper jdbc;
   private HibernateHelper hbm;
 
   public void init(String browser, Properties properties) {
