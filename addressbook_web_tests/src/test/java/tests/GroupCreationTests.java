@@ -17,6 +17,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class GroupCreationTests extends TestBase {
   // read via library jackson
@@ -78,11 +80,26 @@ public class GroupCreationTests extends TestBase {
     return result;
   } */
 
-  public static List<GroupData> singleRandomGroup() {
+  //List
+ /* public static List<GroupData> singleRandomGroup() {
     return List.of(new GroupData()
             .withName(CommonFunctions.randomString(10))
             .withHeader(CommonFunctions.randomString(10))
             .withFooter(CommonFunctions.randomString(10)));
+  }
+  public static List<GroupData> negativeGroupProvider() {
+    var result = new ArrayList<GroupData>(List.of(
+            new GroupData("", "group name'", "", "", "0", null)));
+    return result;
+  } */
+
+//  Stream + Supplier test generator
+  public static Stream<GroupData> singleRandomGroup() {
+    Supplier<GroupData> randomGroup = () -> new GroupData()
+            .withName(CommonFunctions.randomString(10))
+            .withHeader(CommonFunctions.randomString(10))
+            .withFooter(CommonFunctions.randomString(10));
+    return Stream.generate(randomGroup).limit(3);
   }
   public static List<GroupData> negativeGroupProvider() {
     var result = new ArrayList<GroupData>(List.of(
