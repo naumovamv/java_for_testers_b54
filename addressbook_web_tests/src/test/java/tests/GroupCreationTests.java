@@ -17,7 +17,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GroupCreationTests extends TestBase {
@@ -121,6 +123,19 @@ public class GroupCreationTests extends TestBase {
     expectedList.add(group.withId(newGroups.get(newGroups.size() - 1).id()).withHeader("").withFooter(""));
     expectedList.sort(compareById);
     Assertions.assertEquals(newGroups, expectedList);
+  }
+
+  @ParameterizedTest
+  @MethodSource("groupProvider")
+  public void canCreateMultipleGroupTestWithComparingSets(GroupData group) {
+    var oldGroups = app.groups().getList();
+    app.groups().createGroup(group);
+    var newGroups = app.groups().getList();
+    var extraGroups = newGroups.stream().filter(g -> ! oldGroups.contains(g)).collect(Collectors.toList());
+    var newId  = extraGroups.get(0).id();
+    var expectedList = new ArrayList<>(oldGroups);
+    expectedList.add(group.withId(newId));
+    Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
   }
 
   @ParameterizedTest
