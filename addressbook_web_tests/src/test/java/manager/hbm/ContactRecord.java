@@ -24,13 +24,17 @@ public class ContactRecord {
   @Column(name = "mobile")
   public String mobile;
 
+  @Column(name = "work")
+  public String work;
+
   public Date deprecated = new Date();
 
-  public ContactRecord(int id, String firstname, String lastname, String mobile) {
+  public ContactRecord(int id, String firstname, String lastname, String mobile, String work) {
 
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.mobile = mobile;
+    this.work = work;
   }
 }

@@ -44,7 +44,9 @@ public class JdbcHelper extends HelperBase {
                 .withId(result.getString("id"))
                 .withName(result.getString("firstname"))
                 .withLastName(result.getString("lastname"))
-                .withMobilePhone(result.getString("mobile")));
+                .withMobilePhone(result.getString("mobile"))
+                .withWork(result.getString("work"))
+                .withSecondary(result.getString("fax")));
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);

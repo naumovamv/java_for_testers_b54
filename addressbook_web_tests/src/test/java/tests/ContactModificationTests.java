@@ -1,7 +1,6 @@
 package tests;
 
 import model.ContactData;
-import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class ContactModificationTests extends TestBase {
   @Test
   void canModifyContact() {
     if (app.contacts().getContactCount() == 0) {
-      app.contacts().createContact(new ContactData("", "First name", "Last name", "+7(888)7776655", "", "0", ""));
+      app.contacts().createContact(new ContactData("", "First name", "Last name", "+7(888)7776655", "", "0", "", "", "", ""));
     }
     var oldContacts = app.contacts().getList();
     var rnd = new Random();
@@ -34,7 +33,7 @@ public class ContactModificationTests extends TestBase {
   @Test
   void canModifyContactDbAssertTest() {
     if (app.jdbc().getContactList().isEmpty()) {
-      app.contacts().createContact(new ContactData("", "First name", "Last name", "+7(888)7776655", "", "0", ""));
+      app.contacts().createContact(new ContactData("", "First name", "Last name", "+7(888)7776655", "", "0", "", "", "", ""));
     }
     var oldContacts = app.jdbc().getContactList();
     var rnd = new Random();

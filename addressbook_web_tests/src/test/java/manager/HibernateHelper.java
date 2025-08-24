@@ -71,7 +71,7 @@ public class HibernateHelper extends HelperBase {
     if ("".equals(id)) {
       id = "0";
     }
-    return new ContactRecord(Integer.parseInt(id), data.firstName(), data.lastName(), data.mobilePhone());
+    return new ContactRecord(Integer.parseInt(id), data.firstName(), data.lastName(), data.mobilePhone(), data.work());
   }
 
 
